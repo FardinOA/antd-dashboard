@@ -42,7 +42,11 @@ const App = ({ children }: { children: ReactNode }) => {
     } = theme.useToken();
 
     return (
-        <Layout>
+        <Layout
+            style={{
+                overflow: "hidden",
+            }}
+        >
             <Sider breakpoint="lg" collapsedWidth="0">
                 <div className="demo-logo-vertical" />
                 <Menu
