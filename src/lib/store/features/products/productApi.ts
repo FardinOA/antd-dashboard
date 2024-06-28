@@ -1,4 +1,4 @@
-import { Product, ProductsResponse } from "../../../../types/product";
+import { Product } from "../../../../types/product";
 import { apiSlice } from "../apiSlice";
 
 interface ProductsResponse {
@@ -16,7 +16,11 @@ export const productApi = apiSlice.injectEndpoints({
             query: ({ limit = 10, skip = 0 }) =>
                 `products?limit=${limit}&skip=${skip}`,
         }),
+
+        getProductDetails: build.query<Product, number>({
+            query: (id: number) => `products/${id}`,
+        }),
     }),
 });
 
-export const { useGetProductsQuery } = productApi;
+export const { useGetProductsQuery, useGetProductDetailsQuery } = productApi;

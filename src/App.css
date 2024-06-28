@@ -1,0 +1,63 @@
+.product-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product-tags {
+    margin-top: 10px;
+}
+
+.product-description {
+    margin-bottom: 20px;
+}
+
+.product-details {
+    margin-bottom: 20px;
+}
+
+.reviews-section {
+    margin-top: 40px;
+}
+
+.review-item {
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* DetailedPageSkeleton.css */
+.skeleton-card-wrapper {
+    margin: 20px;
+}
+
+@media (min-width: 1200px) {
+    .skeleton-card-wrapper {
+        margin: 40px 20px;
+    }
+}
+
+.skeleton-tags {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.skeleton-review-item {
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.skeleton-description {
+    margin-top: 20px;
+}
+
+.skeleton-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.skeleton-detail-label {
+    width: 150px;
+}
