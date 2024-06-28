@@ -1,5 +1,6 @@
 import { Product } from "../../../../types/product";
 import { apiSlice } from "../apiSlice";
+import { setProductDetail } from "./productSlice";
 
 interface ProductsResponse {
     products: Product[];
@@ -20,7 +21,22 @@ export const productApi = apiSlice.injectEndpoints({
         getProductDetails: build.query<Product, number>({
             query: (id: number) => `products/${id}`,
         }),
+
+        patchProduct: build.mutation<
+            Product,
+            { id: number; data: Partial<Product> }
+        >({
+            query: ({ id, ...data }) => ({
+                url: `products/${id}`,
+                method: "PATCH",
+                body: data,
+            }),
+        }),
     }),
 });
 
-export const { useGetProductsQuery, useGetProductDetailsQuery } = productApi;
+export const {
+    useGetProductsQuery,
+    useGetProductDetailsQuery,
+    usePatchProductMutation,
+} = productApi;

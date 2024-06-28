@@ -39,3 +39,9 @@ export interface Review {
     reviewerName: string;
     reviewerEmail: string;
 }
+
+export interface Category {
+    name: string;
+    slug: string;
+    url: string;
+}

@@ -4,6 +4,7 @@ import Dashboard from "./components/pages/Dashboard";
 import Products from "./components/pages/Products";
 import NotFound from "./components/pages/NotFound";
 import ProductDetails from "./components/pages/Products/ProductDetails";
+import UpdateProduct from "./components/pages/Products/UpdateProduct";
 
 function App() {
     return (
@@ -15,6 +16,10 @@ function App() {
                     <Route
                         path="/product/:productId"
                         element={<ProductDetails />}
+                    />
+                    <Route
+                        path="/product/edit/:productId"
+                        element={<UpdateProduct />}
                     />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
