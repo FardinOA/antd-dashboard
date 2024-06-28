@@ -1,6 +1,12 @@
 import React, { ReactNode } from "react";
-import { DashboardFilled, ProductFilled } from "@ant-design/icons";
+import {
+    DashboardFilled,
+    ProductFilled,
+    PlusSquareFilled,
+    OrderedListOutlined,
+} from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
+import { Link } from "react-router-dom";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -8,12 +14,25 @@ const items = [
     {
         key: "dashboard",
         icon: React.createElement(DashboardFilled),
-        label: `Dashboard`,
+        label: <Link to="/">Dashboard</Link>,
     },
+
     {
-        key: "products",
+        label: "Products",
+        key: "SubMenu",
         icon: React.createElement(ProductFilled),
-        label: `Products`,
+        children: [
+            {
+                key: "product-list",
+                icon: React.createElement(OrderedListOutlined),
+                label: <Link to="/products">List</Link>,
+            },
+            {
+                key: "add-product",
+                icon: React.createElement(PlusSquareFilled),
+                label: <Link to="/add-product">Add Product</Link>,
+            },
+        ],
     },
 ];
 
