@@ -23,5 +23,6 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
+    "filesGlob": ["**/*.ts"],
     "include": ["src"]
 }

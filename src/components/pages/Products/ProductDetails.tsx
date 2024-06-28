@@ -15,13 +15,13 @@ import DetailedPageSkeleton from "./DetailedPageSkeleton";
 import { Review } from "../../../types/product";
 const { Title } = Typography;
 const ProductDetails = () => {
-    const { productId } = useParams(); // Access product ID from URL params
+    const { productId } = useParams(); // productId could be undefined
 
     const {
         data: product,
         isFetching,
         error,
-    } = useGetProductDetailsQuery(productId, {
+    } = useGetProductDetailsQuery(productId ? parseInt(productId) : undefined, {
         skip: !productId,
 
         refetchOnMountOrArgChange: true,

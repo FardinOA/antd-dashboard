@@ -13,15 +13,16 @@ import {
     Radio,
 } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { UploadFile } from "antd/es/upload/interface";
 import {
     useGetProductDetailsQuery,
     usePatchProductMutation,
-} from "../../../lib/store/features/products/productApi";
-import { Category, Product } from "../../../types/product";
+} from "../../../../lib/store/features/products/productApi";
+import { Category, Product } from "../../../../types/product";
+import ReviewRow from "./ReviewRow";
 
 const UpdateProduct: React.FC = () => {
     const { productId } = useParams();
@@ -35,7 +36,7 @@ const UpdateProduct: React.FC = () => {
         data: product,
 
         error: productError,
-    } = useGetProductDetailsQuery(productId, {
+    } = useGetProductDetailsQuery(productId ? parseInt(productId) : undefined, {
         skip: !productId,
         refetchOnMountOrArgChange: true,
     });
@@ -85,21 +86,25 @@ const UpdateProduct: React.FC = () => {
     };
 
     const handleFinish = async (values: Product) => {
-        const formData = {
+        if (productId === undefined) {
+            throw new Error("Product ID is required.");
+        }
+
+        const data: Product = {
             ...values,
-            id: productId,
+            // TODO: append images array
             meta: {
                 ...values.meta,
                 qrCode:
                     qrCodeOption === "url"
-                        ? values.meta.qrCode
+                        ? values.meta.qrCode ?? ""
                         : qrCodeFileList.length > 0
-                        ? qrCodeFileList[0].url
+                        ? qrCodeFileList[0].url ?? ""
                         : "",
             },
         };
         try {
-            await patchProduct(formData).unwrap();
+            await patchProduct({ id: +productId, data }).unwrap();
             message.success("Product updated successfully!");
         } catch (error) {
             message.error("Failed to update product");
@@ -410,72 +415,7 @@ const UpdateProduct: React.FC = () => {
                     </Form.Item>
                 </Col>
             </Row>
-            <Row gutter={24}>
-                <Col xs={24}>
-                    <Form.List name="reviews">
-                        {(fields, { add, remove }) => (
-                            <>
-                                {fields.map((field) => (
-                                    <Row key={field.key} gutter={8}>
-                                        <Col span={8}>
-                                            <Form.Item
-                                                {...field}
-                                                name={[field.name, "rating"]}
-                                                fieldKey={[
-                                                    field.fieldKey,
-                                                    "rating",
-                                                ]}
-                                            >
-                                                <Rate allowHalf />
-                                            </Form.Item>
-                                        </Col>
-                                        <Col span={12}>
-                                            <Form.Item
-                                                {...field}
-                                                name={[field.name, "comment"]}
-                                                fieldKey={[
-                                                    field.fieldKey,
-                                                    "comment",
-                                                ]}
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                        message:
-                                                            "Please enter a comment",
-                                                    },
-                                                ]}
-                                            >
-                                                <Input placeholder="Review comment" />
-                                            </Form.Item>
-                                        </Col>
-                                        <Col span={4}>
-                                            <Button
-                                                type="link"
-                                                danger
-                                                onClick={() =>
-                                                    remove(field.name)
-                                                }
-                                            >
-                                                Remove
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                ))}
-                                <Form.Item>
-                                    <Button
-                                        type="dashed"
-                                        onClick={() => add()}
-                                        block
-                                        icon={<PlusOutlined />}
-                                    >
-                                        Add Review
-                                    </Button>
-                                </Form.Item>
-                            </>
-                        )}
-                    </Form.List>
-                </Col>
-            </Row>
+            <ReviewRow />
             <Form.Item>
                 <Button type="primary" htmlType="submit">
                     Submit

@@ -3,9 +3,10 @@ import React from "react";
 import { Table, Pagination, Button, Skeleton, Flex } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useGetProductsQuery } from "../../../lib/store/features/products/productApi";
-import { Product } from "../../../../types/product";
+
 import { EyeFilled, EditFilled } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { Product } from "../../../types/product";
 const Products: React.FC = () => {
     const [currentPage, setCurrentPage] = React.useState(1);
     const [pageSize, setPageSize] = React.useState(10);
