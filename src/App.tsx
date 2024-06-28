@@ -1,11 +1,12 @@
-import { Button } from "antd";
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
     return (
-        <>
-            <Button>Click </Button>
-        </>
+        <Router>
+            <Routes>
+                <Route path="/" element={<></>} />{" "}
+            </Routes>
+        </Router>
     );
 }
 
