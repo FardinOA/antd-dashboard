@@ -67,3 +67,45 @@
     align-items: center;
     gap: 10px;
 }
+
+/* Login.css */
+.login-section {
+    align-items: center;
+    background-color: var(--ant-layout-body-background);
+    display: flex;
+    height: 100vh;
+    padding: 32px 0; /* Adjust based on screen size */
+}
+
+.login-section .container {
+    margin: 0 auto;
+    padding: 48px; /* Adjust based on screen size */
+    width: 380px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.login-section .header {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.login-section .title {
+    font-size: 24px; /* Adjust based on screen size */
+}
+
+.login-section .text {
+    color: var(--ant-text-color-secondary);
+}
+
+.login-section .footer {
+    margin-top: 24px;
+    text-align: center;
+    width: 100%;
+}
+
+.login-section .forgot-password {
+    float: right;
+    color: var(--ant-primary-color);
+}

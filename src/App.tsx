@@ -14,7 +14,7 @@ import UpdateProduct from "./components/pages/Products/UpdateProduct";
 import Login from "./components/Auth/Login";
 
 const ProtectedRoutes = () => {
-    const isAuth = true;
+    const isAuth = localStorage.getItem("360ict_token");
 
     return isAuth ? (
         <Main>
